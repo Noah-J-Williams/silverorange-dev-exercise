@@ -1,0 +1,13 @@
+.repo-item {
+  display: flex;
+  flex-direction: row;
+
+  &__link{
+    text-decoration: none;
+    color: black;
+  }
+
+  &__text{
+    padding: 1rem;
+  }
+}
