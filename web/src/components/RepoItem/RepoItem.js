@@ -11,10 +11,10 @@ export default function RepoItem({
   return (
     <Link className="repo-item__link" to={`/${repoId}`}>
       <div className="repo-item">
-        <p className="repo-item__text">{name}</p>
-        <p className="repo-item__text">{description}</p>
-        <p className="repo-item__text">{language}</p>
-        <p className="repo-item__text">{forksCount}</p>
+        <p className="repo-item__text">Name: {name}</p>
+        <p className="repo-item__text">Description: {description}</p>
+        <p className="repo-item__text">Language: {language}</p>
+        <p className="repo-item__text">Forks: {forksCount}</p>
       </div>
     </Link>
   );
