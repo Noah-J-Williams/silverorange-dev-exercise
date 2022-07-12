@@ -32,6 +32,6 @@ export default function RepoList() {
       })}
     </main>
   ) : (
-    <></>
+    <h1>If the page hasn't loaded shortly, try refreshing it.</h1>
   );
 }

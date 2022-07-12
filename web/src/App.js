@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RepoList from './components/RepoList/RepoList';
+import RepoDetails from './components/RepoDetails/RepoDetails';
 import './App.css';
 
 export function App() {
@@ -9,7 +10,7 @@ export function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" exact={true} element={<RepoList />} />
-          {/* <Route path='/:repoId' element={<RepoDetails/>}/> */}
+          <Route path="/:repoId" element={<RepoDetails />} />
         </Routes>
       </BrowserRouter>
     </div>
