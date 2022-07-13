@@ -73,6 +73,12 @@ const newConfig = Object.assign({}, config, {
             'error',
             { default: 'array-simple' },
           ],
+          'prettier/prettier': [
+            'error',
+            {
+              'endOfLine': 'auto',
+            }
+          ],
           '@typescript-eslint/ban-types': 'error',
           '@typescript-eslint/naming-convention': [
             'error',

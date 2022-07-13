@@ -4,7 +4,9 @@ import RepoItem from '../RepoItem/RepoItem';
 
 export default function RepoList() {
   const [repos, setRepos] = useState({ loading: true });
-  const [language, setLanuages] = useState();
+  const [languages, setLanuages] = useState();
+  const [filter, setFilter] = useState('All');
+
   useEffect(() => {
     axios
       .get('http://localhost:4000/repos')
@@ -21,25 +23,42 @@ export default function RepoList() {
   }, []);
 
   useEffect(() => {
-    const languages = [];
+    const languageArray = ['All'];
     for (let i = 0; i < repos.length; i++) {
-      if (!languages.includes(repos[i].language)) {
-        languages.push(repos[i].language);
+      if (!languageArray.includes(repos[i].language)) {
+        languageArray.push(repos[i].language);
       }
     }
-    setLanuages(languages);
+    setLanuages(languageArray);
   }, [repos]);
+
+  const languageFilter = (e) => {
+    setFilter(e.target.name);
+    return () => setValue(value => value + 1);
+  };
 
   return !repos.loading ? (
     <main>
-      {language.map((lang) => {
+      {languages.map((lang) => {
         return (
-          <button key={lang} name={lang}>
+          <button key={lang} name={lang} onClick={languageFilter}>
             {lang}
           </button>
         );
       })}
-      {repos.map((repo) => {
+      {filter === 'All' ? repos.map((repo) => {
+        return (
+          <RepoItem
+            key={repo.id}
+            repoId={repo.id}
+            name={repo.name}
+            description={repo.description}
+            language={repo.language}
+            forksCount={repo.forks_count}
+          />
+        );
+      }):
+      repos.filter(repo => repo.language === filter).map((repo) => {
         return (
           <RepoItem
             key={repo.id}
