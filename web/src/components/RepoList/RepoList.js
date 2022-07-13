@@ -13,7 +13,7 @@ export default function RepoList() {
       .then((res) => {
         setRepos(
           res.data.sort((a, b) => {
-            return b.created_at - a.created_at;
+            return Date.parse(b.created_at) - Date.parse(a.created_at);
           })
         );
       })
