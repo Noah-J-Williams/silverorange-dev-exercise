@@ -18,7 +18,7 @@ export default function RepoList() {
         );
       })
       .catch((err) => {
-        console.log(err);
+        return err;
       });
   }, []);
 
@@ -34,19 +34,23 @@ export default function RepoList() {
 
   const languageFilter = (e) => {
     setFilter(e.target.name);
-    return () => setValue((value) => value + 1);
   };
 
   return !repos.loading ? (
     <main className="repo-list">
       <div className="repo-list__button-holder">
-      {languages.map((lang) => {
-        return (
-          <button className="repo-list__button" key={lang} name={lang} onClick={languageFilter}>
-            {lang}
-          </button>
-        );
-      })}
+        {languages.map((lang) => {
+          return (
+            <button
+              className="repo-list__button"
+              key={lang}
+              name={lang}
+              onClick={languageFilter}
+            >
+              {lang}
+            </button>
+          );
+        })}
       </div>
       {filter === 'All'
         ? repos.map((repo) => {
@@ -55,7 +59,7 @@ export default function RepoList() {
                 key={repo.id}
                 repoId={repo.id}
                 name={repo.name}
-                description={repo.description ? repo.description : "N/A"}
+                description={repo.description ? repo.description : 'N/A'}
                 language={repo.language}
                 forksCount={repo.forks_count}
               />
