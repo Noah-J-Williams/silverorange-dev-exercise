@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RepoItem from '../RepoItem/RepoItem';
-
+import './RepoList.scss';
 export default function RepoList() {
   const [repos, setRepos] = useState({ loading: true });
   const [languages, setLanuages] = useState();
@@ -34,42 +34,47 @@ export default function RepoList() {
 
   const languageFilter = (e) => {
     setFilter(e.target.name);
-    return () => setValue(value => value + 1);
+    return () => setValue((value) => value + 1);
   };
 
   return !repos.loading ? (
-    <main>
+    <main className="repo-list">
+      <div className="repo-list__button-holder">
       {languages.map((lang) => {
         return (
-          <button key={lang} name={lang} onClick={languageFilter}>
+          <button className="repo-list__button" key={lang} name={lang} onClick={languageFilter}>
             {lang}
           </button>
         );
       })}
-      {filter === 'All' ? repos.map((repo) => {
-        return (
-          <RepoItem
-            key={repo.id}
-            repoId={repo.id}
-            name={repo.name}
-            description={repo.description}
-            language={repo.language}
-            forksCount={repo.forks_count}
-          />
-        );
-      }):
-      repos.filter(repo => repo.language === filter).map((repo) => {
-        return (
-          <RepoItem
-            key={repo.id}
-            repoId={repo.id}
-            name={repo.name}
-            description={repo.description}
-            language={repo.language}
-            forksCount={repo.forks_count}
-          />
-        );
-      })}
+      </div>
+      {filter === 'All'
+        ? repos.map((repo) => {
+            return (
+              <RepoItem
+                key={repo.id}
+                repoId={repo.id}
+                name={repo.name}
+                description={repo.description ? repo.description : "N/A"}
+                language={repo.language}
+                forksCount={repo.forks_count}
+              />
+            );
+          })
+        : repos
+            .filter((repo) => repo.language === filter)
+            .map((repo) => {
+              return (
+                <RepoItem
+                  key={repo.id}
+                  repoId={repo.id}
+                  name={repo.name}
+                  description={repo.description}
+                  language={repo.language}
+                  forksCount={repo.forks_count}
+                />
+              );
+            })}
     </main>
   ) : (
     <h1>If the page hasn't loaded shortly, try refreshing it.</h1>

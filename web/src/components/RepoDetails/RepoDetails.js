@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import './RepoDetails.scss';
 
 export default function RepoDetails() {
   const [oneRepo, setOneRepo] = useState();
@@ -59,17 +60,22 @@ export default function RepoDetails() {
   };
 
   return !loading ? (
-    <main>
-      <button onClick={handleBack}>Back</button>
-      <p>Commit date: {commits.commit.author.date}</p>
-      <p>Author: {commits.commit.author.name}</p>
-      <p>Message: {commits.commit.message}</p>
+    <main className='details'>
+      <div className='details__holder'>
+      <button className='details__button' onClick={handleBack}>Back</button>
+      <p className='details__text'>Commit date: {commits.commit.author.date}</p>
+      <p className='details__text'>Author: {commits.commit.author.name}</p>
+      <p className='details__text'>Message: {commits.commit.message}</p>
+      </div>
+      <div className='details__readme'>
       {readme ? <ReactMarkdown>{readme}</ReactMarkdown> : <></>}
+      </div>
     </main>
   ) : (
     <div>
-      <button onClick={handleBack}>Back</button>
+      <button className='details__button' onClick={handleBack}>Back</button>
       <p>{commits.error}</p>
+      <p>{oneRepo === undefined ? "If the page doesn't load shortly, try refreshing it." : ""}</p>
     </div>
   );
 }

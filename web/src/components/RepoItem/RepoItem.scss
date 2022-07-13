@@ -1,6 +1,9 @@
 .repo-item {
   display: flex;
   flex-direction: row;
+  border: 1px solid grey;
+  border-radius: 4px;
+  margin: 1rem;
 
   &__link {
     text-decoration: none;

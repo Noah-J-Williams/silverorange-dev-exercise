@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RepoList from './components/RepoList/RepoList';
 import RepoDetails from './components/RepoDetails/RepoDetails';
-import './App.css';
+import './App.scss';
 
 export function App() {
   return (
