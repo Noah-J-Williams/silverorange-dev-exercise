@@ -7,6 +7,7 @@ export default function RepoList() {
   const [languages, setLanuages] = useState();
   const [filter, setFilter] = useState('All');
 
+  //gets the list of repos sorted in reverse chronological order
   useEffect(() => {
     axios
       .get('http://localhost:4000/repos')
@@ -22,6 +23,7 @@ export default function RepoList() {
       });
   }, []);
 
+  //this looks at all the languages in the repos we have and collects all of the languages for making filter buttons
   useEffect(() => {
     const languageArray = ['All'];
     for (let i = 0; i < repos.length; i++) {
@@ -32,10 +34,12 @@ export default function RepoList() {
     setLanuages(languageArray);
   }, [repos]);
 
+  //event listener to change the filtered language
   const languageFilter = (e) => {
     setFilter(e.target.name);
   };
 
+  //if our page is not loading, map through the languages to create each sort button
   return !repos.loading ? (
     <main className="repo-list">
       <div className="repo-list__button-holder">
@@ -52,6 +56,7 @@ export default function RepoList() {
           );
         })}
       </div>
+      //if the filter is the default 'All' show all repos
       {filter === 'All'
         ? repos.map((repo) => {
             return (
@@ -65,6 +70,7 @@ export default function RepoList() {
               />
             );
           })
+          //otherwise we filter by the selected language
         : repos
             .filter((repo) => repo.language === filter)
             .map((repo) => {

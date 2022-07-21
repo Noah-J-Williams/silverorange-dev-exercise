@@ -9,6 +9,7 @@ export function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          //setting up routes for ease of navigation
           <Route path="/" exact={true} element={<RepoList />} />
           <Route path="/:repoId" element={<RepoDetails />} />
         </Routes>

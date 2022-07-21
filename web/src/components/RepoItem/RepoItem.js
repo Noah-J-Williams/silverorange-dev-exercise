@@ -8,6 +8,7 @@ export default function RepoItem({
   language,
   forksCount,
 }) {
+  //deconstructs the props and displays the data inside a link that takes the user to RepoDetails
   return (
     <Link className="repo-item__link" to={`/${repoId}`}>
       <div className="repo-item">

@@ -12,6 +12,7 @@ export default function RepoDetails() {
   const navigate = useNavigate();
   const { repoId } = useParams();
 
+  //this loads all the repos from the api and finds the correct repo (change to Array.find)
   useEffect(() => {
     axios
       .get('http://localhost:4000/repos')
@@ -25,6 +26,7 @@ export default function RepoDetails() {
       });
   }, [repoId]);
 
+  //Once the repo is loaded, find the commits
   useEffect(() => {
     if (oneRepo) {
       axios
@@ -50,10 +52,12 @@ export default function RepoDetails() {
     }
   }, [oneRepo]);
 
+  //event listener for navigating back to the main list
   const handleBack = (e) => {
     navigate('/');
   };
 
+  //if the data isn't loading, display the page, otherwise we show our messaging to refresh or show an error
   return !loading ? (
     <main className="details">
       <div className="details__holder">
